@@ -1,0 +1,150 @@
+version: 2
+
+models:
+  - name: dim_vendors
+    description: "Vendor dimension table"
+    columns:
+      - name: VENDOR_KEY
+        description: "Primary key for vendor dimension"
+        tests:
+          - unique
+          - not_null
+      - name: VENDOR_NAME
+        description: "Vendor name"
+        tests:
+          - not_null
+
+  - name: dim_departments
+    description: "Department dimension table"
+    columns:
+      - name: DEPARTMENT_KEY
+        description: "Primary key for department dimension"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_projects
+    description: "Project dimension table"
+    columns:
+      - name: PROJECT_KEY
+        description: "Primary key for project dimension"
+        tests:
+          - unique
+          - not_null
+      - name: BUDGET
+        description: "Project budget amount"
+        tests:
+          - not_null
+
+  - name: dim_materials
+    description: "Materials dimension table"
+    columns:
+      - name: MATERIAL_KEY
+        description: "Primary key for material dimension"
+        tests:
+          - unique
+          - not_null
+
+  - name: dim_locations
+    description: "Locations dimension table"
+    columns:
+      - name: LOCATION_KEY
+        description: "Primary key for location dimension"
+        tests:
+          - unique
+          - not_null
+
+  - name: fact_purchases
+    description: "Purchase fact table"
+    columns:
+      - name: PURCHASE_KEY
+        description: "Primary key for purchase fact"
+        tests:
+          - unique
+          - not_null
+      - name: VENDOR_ID
+        description: "Foreign key to vendor dimension"
+        tests:
+          - relationships:
+              to: ref('dim_vendors')
+              field: VENDOR_KEY
+      - name: DEPARTMENT_ID
+        description: "Foreign key to department dimension"
+        tests:
+          - relationships:
+              to: ref('dim_departments')
+              field: DEPARTMENT_KEY
+      - name: PROJECT_ID
+        description: "Foreign key to project dimension"
+        tests:
+          - relationships:
+              to: ref('dim_projects')
+              field: PROJECT_KEY
+      - name: MATERIAL_ID
+        description: "Foreign key to material dimension"
+        tests:
+          - relationships:
+              to: ref('dim_materials')
+              field: MATERIAL_KEY
+      - name: QUANTITY
+        description: "Purchase quantity"
+        tests:
+          - not_null
+      - name: TOTAL_PRICE
+        description: "Total price of the purchase item"
+        tests:
+          - value_greater_than:
+              min_value: 0    
+
+  - name: fact_vendor_performance
+    description: "Vendor performance fact table"
+    columns:
+      - name: PERFORMANCE_KEY
+        description: "Primary key for vendor performance fact"
+        tests:
+          - unique
+          - not_null
+      - name: VENDOR_ID
+        description: "Foreign key to vendor dimension"
+        tests:
+          - relationships:
+              to: ref('dim_vendors')
+              field: VENDOR_KEY
+
+  - name: fact_project_milestones
+    description: "Project milestones fact table"
+    columns:
+      - name: MILESTONE_KEY
+        description: "Primary key for project milestone fact"
+        tests:
+          - unique
+          - not_null
+      - name: PROJECT_ID
+        description: "Foreign key to project dimension"
+        tests:
+          - relationships:
+              to: ref('dim_projects')
+              field: PROJECT_KEY
+
+  - name: fact_resource_allocation
+    description: "Resource allocation fact table"
+    columns:
+      - name: ALLOCATION_KEY
+        description: "Primary key for resource allocation fact"
+        tests:
+          - unique
+          - not_null
+      - name: PROJECT_ID
+        description: "Foreign key to project dimension"
+        tests:
+          - relationships:
+              to: ref('dim_projects')
+              field: PROJECT_KEY
+      - name: DEPARTMENT_ID
+        description: "Foreign key to department dimension"
+        tests:
+          - relationships:
+              to: ref('dim_departments')
+              field: DEPARTMENT_KEY
+
+               

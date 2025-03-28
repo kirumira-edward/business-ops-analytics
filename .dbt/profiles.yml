@@ -1,0 +1,13 @@
+business_ops:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      account: TKVSUDL-VO25652
+      user: Kirumiraedward
+      password: SnowingFlake256
+      role: BUSINESS_OPS_ROLE
+      database: BUSINESS_OPS_DB
+      warehouse: BUSINESS_OPS_WH
+      schema: ANALYTICS
+      threads: 4

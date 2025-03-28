@@ -1,0 +1,17 @@
+version: 2
+
+sources:
+  - name: raw
+    database: BUSINESS_OPS_DB
+    schema: RAW
+    tables:
+      - name: VENDORS
+      - name: DEPARTMENTS
+      - name: PROJECTS
+      - name: MATERIALS
+      - name: LOCATIONS
+      - name: PURCHASE_ORDERS
+      - name: PURCHASE_ORDER_ITEMS
+      - name: VENDOR_PERFORMANCE
+      - name: PROJECT_MILESTONES
+      - name: RESOURCE_ALLOCATIONS
