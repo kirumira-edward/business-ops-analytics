@@ -3,9 +3,9 @@ business_ops:
   outputs:
     dev:
       type: snowflake
-      account: TKVSUDL-VO25652
-      user: Kirumiraedward
-      password: SnowingFlake256
+      account: [your account identifier]
+      user: [ your username]
+      password: [ your password here]
       role: BUSINESS_OPS_ROLE
       database: BUSINESS_OPS_DB
       warehouse: BUSINESS_OPS_WH
